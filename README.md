@@ -86,7 +86,7 @@ Try to run the script with AutoHotKey, if they link together you can move the sc
 To install extend you need to download the BigBagOfTricks from Dreymar and apply the extend layer with setxkb.
 - Clone the BigBagOfTricks repository
 ```bash
-git clone https://github.com/DreymaR/BigBagKbdTrixPKL.git
+git clone https://github.com/DreymaR/BigBagKbdTrixXKB.git
 ```
 - cd inside the new directory
 ```bash
