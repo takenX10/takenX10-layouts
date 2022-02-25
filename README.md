@@ -95,12 +95,12 @@ cd BigBagKbdTrixXKB
 
 - make the installer executable
 ```bash
-chmod +x install_dreymar_mod.sh
+chmod +x install-dreymar-xmod.sh
 ```
 
 - run the installer
 ```bash
-sudo ./install_dreymar_mod.sh
+sudo ./install-dreymar-xmod.sh
 ```
 ***WARNING: All your xkb files will be moved elsewere, so if you already modified something there you should back everything up before launching the installer.***
 
@@ -110,7 +110,7 @@ To apply all the changes you should run this command
 setxkbmap -v 9 -option "" -option "misc:extend,lv5:caps_switch_lock,compose:menu"
 ```
 #### Canc and backspace
-The BigBagOfTricks extend layer has the canc and backspace buttons inverted, so to invert them you need to modify the extend xkb config file. I already created a fixed version for you, to install it just run the `invert_canc_backspace.sh` script.
+The BigBagOfTricks extend layer has the canc and backspace buttons inverted, so to invert them you need to modify the extend xkb config file. I already created a fixed version for you, to install it just run the `invert_canc_backspace.sh` script inside the linux folder in my repository.
 ```bash
 sudo ./invert_canc_backspace.sh
 ``` 
