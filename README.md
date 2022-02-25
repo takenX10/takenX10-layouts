@@ -14,6 +14,7 @@ This is a repository where I store my layouts
 	- [Custom Programmer Dvorak Windows](#custom-programmer-dvorak-windows)
 	- [Extend Windows](#extend-windows)
 - [Linux layouts](#linux-layouts)
+ 	- [Keyboard repeat rate](#keyboard-repeat-rate)
 	- [Extend Linux](#extend-linux)
 		- [Default installation](#default-installation)
 		- [Canc and backspace](#canc-and-backspace)
@@ -80,7 +81,11 @@ If you want to use another extend layer just remember to edit those lines.
 
 Try to run the script with AutoHotKey, if they link together you can move the script file or a link to the script file in the auto run folder, otherwise just run it whenever you need it. (auto run folder: `%appdata%\Microsoft\Windows\Start Menu\Programs\Startup`)
 ## Linux layouts
-
+### Keyboard repeat rate
+```bash
+gsettings set org.gnome.desktop.peripherals.keyboard delay 150
+gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
+```
 ### Extend Linux
 #### Default installation
 To install extend you need to download the BigBagOfTricks from Dreymar and apply the extend layer with setxkb.
