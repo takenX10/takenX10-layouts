@@ -1,0 +1,72 @@
+{
+	"name": "vscode-html-format",
+	"displayName": "HTML Format",
+	"description": "Format HTML documents.",
+	"version": "0.0.5",
+	"publisher": "mohd-akram",
+	"engines": {
+		"vscode": "^1.69.0"
+	},
+	"categories": [
+		"Formatters"
+	],
+	"activationEvents": [
+		"onLanguage:handlebars",
+		"onLanguage:html"
+	],
+	"main": "./out/extension",
+	"icon": "icon.png",
+	"capabilities": {
+		"documentFormattingProvider": "true"
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mohd-akram/vscode-html-format.git"
+	},
+	"keywords": [
+		"visual studio code",
+		"html",
+		"format"
+	],
+	"author": "Mohamed Akram",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/mohd-akram/vscode-html-format/issues"
+	},
+	"homepage": "https://github.com/mohd-akram/vscode-html-format#readme",
+	"devDependencies": {
+		"@types/glob": "^7.2.0",
+		"@types/mocha": "^9.1.1",
+		"@types/node": "^18.6.2",
+		"@types/vscode": "^1.69.0",
+		"@typescript-eslint/eslint-plugin": "^5.31.0",
+		"@typescript-eslint/parser": "^5.31.0",
+		"@vscode/test-electron": "^2.1.5",
+		"eslint": "^8.20.0",
+		"glob": "^8.0.3",
+		"mocha": "^10.0.0",
+		"typescript": "^4.7.4"
+	},
+	"dependencies": {
+		"html-format": "^1.0.2"
+	},
+	"__metadata": {
+		"id": "3c307d2b-baa0-4295-b541-c3d90519b713",
+		"publisherId": "437ecc80-3edc-448e-a774-a205cccba9e3",
+		"publisherDisplayName": "Mohamed Akram",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1668068903210,
+		"preRelease": false
+	}
+}

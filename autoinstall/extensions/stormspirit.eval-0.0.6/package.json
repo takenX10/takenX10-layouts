@@ -1,0 +1,73 @@
+{
+	"name": "eval",
+	"displayName": "eval",
+	"description": "Eval your select javascript codes.",
+	"keywords": [
+		"js",
+		"eval",
+		"vscode",
+		"extension"
+	],
+	"icon": "logo.png",
+	"version": "0.0.6",
+	"publisher": "Stormspirit",
+	"license": "MIT",
+	"homepage": "https://github.com/Naixor/eval-vscode-extension",
+	"bugs": {
+		"url": "https://github.com/Naixor/eval-vscode-extension/issues",
+		"email": "hongyesoftware@gmail.com"
+	},
+	"engines": {
+		"vscode": "^0.10.10"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.eval"
+	],
+	"main": "./out/src/extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.eval",
+				"title": "Eval"
+			}
+		],
+		"configuration": {
+			"title": "Eval config",
+			"properties": {
+				"eval.replaceNumberFormula": {
+					"type": "boolean",
+					"default": false,
+					"description": "Replace your formula with it's number result."
+				},
+				"eval.beautifyObject": {
+					"type": "boolean",
+					"default": true,
+					"description": "Beautify object output or not."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+		"compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install"
+	},
+	"devDependencies": {
+		"typescript": "^1.8.5",
+		"vscode": "^0.11.0"
+	},
+	"__metadata": {
+		"id": "0dcad13a-f817-40ee-b558-bda21945da77",
+		"publisherId": "79c6e0b1-a348-47f4-baeb-3dc9918685cb",
+		"publisherDisplayName": "Stormspirit",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1665591155484,
+		"preRelease": false
+	}
+}

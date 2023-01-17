@@ -1,0 +1,1 @@
+{"version":3,"file":"dispose.js","sourceRoot":"","sources":["../../../src/util/dispose.ts"],"names":[],"mappings":";AAAA;;gGAEgG;;;AAIhG,SAAgB,UAAU,CAAE,WAAgC;IAC1D,OAAO,WAAW,CAAC,MAAM,EAAE;QACzB,MAAM,IAAI,GAAG,WAAW,CAAC,GAAG,EAAE,CAAA;QAC9B,IAAI,IAAI,EAAE;YACR,IAAI,CAAC,OAAO,EAAE,CAAA;SACf;KACF;AACH,CAAC;AAPD,gCAOC"}

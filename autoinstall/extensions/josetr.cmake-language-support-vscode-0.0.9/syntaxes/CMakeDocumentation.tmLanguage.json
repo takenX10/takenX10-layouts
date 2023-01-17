@@ -1,0 +1,113 @@
+{
+  "name": "cmakedocumentation",
+  "scopeName": "source.cmakedocumentation",
+  "patterns": [
+    { "include": "#main" }
+  ],
+  "repository": {
+    "main": {
+      "patterns": [
+        { "include": "#reference" },
+        { "include": "#keyword-control" },
+        { "include": "#command-identifier" },
+        { "include": "#variable" },
+        { "include": "#parameter" },
+        { "include": "#property" },
+        { "include": "#enum" },
+        { "include": "#boolean" },
+        { "include": "#identifier" },
+        { "include": "#highlight" },
+        { "include": "#section" },
+        { "include": "#comment" },
+        { "include": "#bold" },
+        { "include": "#string" },
+        { "include": "#expression" }
+      ]
+    },
+    "keyword-control": {
+      "name": "keyword.control.cmakedocumentation",
+      "match": "(?<=^[ \\t`]*)(?i:macro|endmacro|function|endfunction|return|foreach|endforeach|while|endwhile|continue|break|if|elseif|else|endif)(?=\\s*\\([\\s\\S]*?\\))"
+    },
+    "command-identifier": {
+      "name": "entity.name.function.cmakedocumentation",
+      "match": "(?<=^[ \\t`]*)([A-Za-z_][A-Za-z0-9_]*)(?=\\s*\\()"
+    },
+    "identifier": {
+      "name": "entity.name.type.cmakedocumentation",
+      "match": "\\b[A-Z_][A-Z0-9_]+\\b"
+    },
+    "boolean": {
+      "name": "constant.language.boolean.cmakedocumentation",
+      "match": "\\b(TRUE|FALSE|ON|OFF|YES|NO)\\b"
+    },
+    "variable": {
+      "match": "\\((?:variable|target)\\) ([A-Za-z0-9/_.+-]+)",
+      "captures": { "1": { "name": "variable.other.cmakedocumentation" } }
+    },
+    "parameter": {
+      "match": "\\((?:parameter)\\) ([A-Za-z0-9_]+)",
+      "captures": { "1": { "name": "entity.name.type.cmakedocumentation" } }
+    },
+    "property": {
+      "match": "\\((?:[a-z-]*property)\\) ([A-Za-z0-9_]+)",
+      "captures": { "1": { "name": "entity.name.type.enum.cmakedocumentation" } }
+    },
+    "enum": {
+      "match": "\\((?:module)\\) ([A-Za-z0-9_]+)",
+      "captures": { "1": { "name": "entity.name.type.enum.cmakedocumentation" } }
+    },
+    "reference": {
+      "begin": "(\\$?(ENV|CACHE)|\\$){",
+      "beginCaptures": { "0": { "name": "punctuation.definition.template-expression.begin.cmakedocumentation" } },
+      "end": "}",
+      "endCaptures": { "0": { "name": "punctuation.definition.template-expression.end.cmakedocumentation" } },
+      "patterns": [
+        {
+          "name": "variable.other.cmakedocumentation",
+          "match": "[A-Za-z0-9/_.+-<>]*"
+        }
+      ]
+    },
+    "highlight": {
+      "name": "keyword.preprocessor.cmakedocumentation",
+      "match": "``.*?``|`.*?`",
+      "patterns": [
+        { "include": "#expression" }
+      ]
+    },
+    "section": {
+      "name": "comment.cmakedocumentation",
+      "match": "(^[^\\da-zA-Z\\d\\s:.()]+)\\s*$"
+    },
+    "comment": {
+      "name": "comment.cmakedocumentation",
+      "match": "(#|//)(.*)$"
+    },
+    "bold": {
+      "name": "markup.bold.cmakedocumentation",
+      "match": "\\*\\*[\\s\\S]*?\\*\\*"
+    },
+    "string": {
+      "name": "string.cmakedocumentation",
+      "match": "\"(\\.|.)+\""
+    },
+    "expression": {
+      "name": "expression.group.cmakedocumentation",
+      "begin": "\\(",
+      "end": "\\)",
+      "beginCaptures": { "0": { "name": "punctuation.parenthesis.open.cmakedocumentation" } },
+      "endCaptures": { "0": { "name": "punctuation.parenthesis.close.cmakedocumentation" } },
+      "patterns": [
+        { "include": "#reference" },
+        { "include": "#boolean" },
+        { "include": "#identifier" },
+        { "include": "#number" },
+        { "include": "#string" }
+      ]
+    },
+    "number": {
+      "name": "constant.numeric.cmakedocumentation",
+      "match": "\\b[\\d.]+$"
+    }
+  }
+}

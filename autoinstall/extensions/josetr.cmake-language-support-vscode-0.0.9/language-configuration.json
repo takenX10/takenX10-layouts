@@ -1,0 +1,39 @@
+{
+  "indentationRules": {
+    "increaseIndentPattern": "^\\s*(if|elseif|else|function|macro|while|foreach)\\s*(\\(|$)",
+    "decreaseIndentPattern": "^\\s*(endif|elseif|else|endfunction|endmacro|endwhile|endforeach)\\s*(\\(|$)"
+  },
+  "comments": {
+    // symbol used for single line comment.
+    "lineComment": "#",
+    // symbols used for start and end a block comment.
+    "blockComment": [ "#[[", "]]" ]
+  },
+  // symbols used as brackets
+  "brackets": [
+    [ "(", ")" ],
+    [ "{", "}" ],
+    [ "[", "]" ],
+    [ "<", ">" ]
+  ],
+  // symbols that are auto closed when typing
+  "autoClosingPairs": [
+    [ "(", ")" ],
+    [ "{", "}" ],
+    [ "[", "]" ],
+    [ "<", ">" ],
+    {
+      "open": "\"",
+      "close": "\"",
+      "notIn": [ "string", "comment" ]
+    }
+  ],
+  // symbols that can be used to surround a selection
+  "surroundingPairs": [
+    [ "(", ")" ],
+    [ "{", "}" ],
+    [ "[", "]" ],
+    [ "<", ">" ],
+    [ "\"", "\"" ]
+  ]
+}

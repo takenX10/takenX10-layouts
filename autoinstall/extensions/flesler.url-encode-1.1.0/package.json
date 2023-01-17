@@ -1,0 +1,85 @@
+{
+	"name": "url-encode",
+	"displayName": "URL Encode",
+	"description": "Allows URL-Encoding and URL-Decoding text, supports multiple selections and whole file if none",
+	"version": "1.1.0",
+	"publisher": "flesler",
+	"engines": {
+		"vscode": "^1.5.0"
+	},
+	"icon": "icon.png",
+	"homepage": "https://github.com/flesler/vscode-url-encode/blob/master/README.md",
+	"repository": "https://github.com/flesler/vscode-url-encode",
+	"license": "https://github.com/flesler/vscode-url-encode/blob/master/LICENSE.md",
+	"bugs": "https://github.com/flesler/vscode-url-encode/issues",
+	"keywords": [
+		"url",
+		"uri",
+		"encode",
+		"decode",
+		"component"
+	],
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:url-encode.encodeURL",
+		"onCommand:url-encode.decodeURL"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "url-encode.encodeURL",
+				"title": "URL-Encode selected text"
+			},
+			{
+				"command": "url-encode.decodeURL",
+				"title": "URL-Decode selected text"
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"command": "url-encode.encodeURL",
+					"group": "1_modification"
+				},
+				{
+					"command": "url-encode.decodeURL",
+					"group": "1_modification"
+				}
+			]
+		},
+		"configuration": {
+			"type": "object",
+			"title": "url-encode config",
+			"properties": {
+				"url-encode.encodeWhitespace": {
+					"type": "boolean",
+					"default": false,
+					"description": "If false new lines, carriage returns and tabs will be preserved when encoding"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "mocha"
+	},
+	"devDependencies": {
+		"@types/mocha": "^2.2.32",
+		"@types/node": "^6.0.40",
+		"mocha": "^2.3.3",
+		"vscode": "^1.0.0"
+	},
+	"__metadata": {
+		"id": "b1c8e3a3-a230-49bb-9e69-3407cf382c88",
+		"publisherId": "beaee97c-78d5-46d9-8226-848711bc39b4",
+		"publisherDisplayName": "Ariel Flesler",
+		"targetPlatform": "undefined",
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"preRelease": false,
+		"installedTimestamp": 1648759315272
+	}
+}

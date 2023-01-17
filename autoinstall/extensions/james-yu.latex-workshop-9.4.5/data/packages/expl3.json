@@ -1,0 +1,23 @@
+{
+  "includes": {},
+  "cmds": {
+    "ExplSyntaxOn": {},
+    "ExplSyntaxOff": {},
+    "ProvidesExplClass{}{}{}{}": {
+      "snippet": "ProvidesExplClass{${1:class}}{${2:date}}{${3:version}}{${4:description}}"
+    },
+    "ProvidesExplFile{}{}{}{}": {
+      "snippet": "ProvidesExplFile{${1:file}}{${2:date}}{${3:version}}{${4:description}}"
+    },
+    "ProvidesExplPackage{}{}{}{}": {
+      "snippet": "ProvidesExplPackage{${1:package}}{${2:date}}{${3:version}}{${4:description}}"
+    },
+    "ExplFileName": {},
+    "ExplFileDate": {},
+    "ExplFileVersion": {},
+    "ExplFileDescription": {}
+  },
+  "envs": {},
+  "options": [],
+  "keyvals": []
+}

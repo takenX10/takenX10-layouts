@@ -1,0 +1,531 @@
+{
+	"name": "asciidoctor-vscode",
+	"displayName": "%displayName%",
+	"description": "%description%",
+	"version": "2.9.8",
+	"publisher": "asciidoctor",
+	"author": "João Pinto <lamego.pinto@gmail.com>",
+	"license": "MIT",
+	"readme": "README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/asciidoctor/asciidoctor-vscode"
+	},
+	"galleryBanner": {
+		"color": "#78d6f0",
+		"theme": "light"
+	},
+	"bugs": "https://github.com/asciidoctor/asciidoctor-vscode/issues",
+	"homepage": "https://github.com/asciidoctor/asciidoctor-vscode/blob/master/README.md",
+	"icon": "images/icon.png",
+	"browser": "./dist/browser/extension",
+	"main": "./dist/src/extension.js",
+	"engines": {
+		"vscode": "^1.64.0",
+		"node": ">=14"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"activationEvents": [
+		"onLanguage:asciidoc",
+		"onCommand:asciidoc.exportAsPDF",
+		"onCommand:asciidoc.pasteImage",
+		"onCommand:asciidoc.preview.toggleLock",
+		"onCommand:asciidoc.preview.refresh",
+		"onCommand:asciidoc.saveHTML",
+		"onCommand:asciidoc.showPreview",
+		"onCommand:asciidoc.showPreviewToSide",
+		"onCommand:asciidoc.showLockedPreviewToSide",
+		"onCommand:asciidoc.showSource",
+		"onCommand:asciidoc.showPreviewSecuritySelector",
+		"onWebviewPanel:asciidoc.preview"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "asciidoc",
+				"aliases": [
+					"AsciiDoc",
+					"AsciiDoc(tor)"
+				],
+				"extensions": [
+					".adoc",
+					".ad",
+					".asciidoc",
+					".asc"
+				],
+				"configuration": "./asciidoc-language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "asciidoc",
+				"scopeName": "text.asciidoc",
+				"path": "./syntaxes/Asciidoctor.json"
+			}
+		],
+		"commands": [
+			{
+				"command": "asciidoc.exportAsPDF",
+				"title": "%asciidoc.exportAsPDF.title%",
+				"category": "AsciiDoc",
+				"icon": {
+					"light": "./media/Preview.svg",
+					"dark": "./media/Preview_inverse.svg"
+				}
+			},
+			{
+				"command": "asciidoc.pasteImage",
+				"title": "%asciidoc.pasteImage.title%",
+				"category": "AsciiDoc",
+				"icon": {
+					"light": "./media/preview-light.svg",
+					"dark": "./media/preview-dark.svg"
+				}
+			},
+			{
+				"command": "asciidoc.showPreview",
+				"title": "%asciidoc.preview.title%",
+				"category": "AsciiDoc",
+				"icon": {
+					"light": "./media/preview-light.svg",
+					"dark": "./media/preview-dark.svg"
+				}
+			},
+			{
+				"command": "asciidoc.showPreviewToSide",
+				"title": "%asciidoc.previewSide.title%",
+				"category": "AsciiDoc",
+				"icon": {
+					"light": "./media/PreviewOnRightPane_16x.svg",
+					"dark": "./media/PreviewOnRightPane_16x_dark.svg"
+				}
+			},
+			{
+				"command": "asciidoc.showLockedPreviewToSide",
+				"title": "%asciidoc.showLockedPreviewToSide.title%",
+				"category": "AsciiDoc",
+				"icon": {
+					"light": "./media/PreviewOnRightPane_16x.svg",
+					"dark": "./media/PreviewOnRightPane_16x_dark.svg"
+				}
+			},
+			{
+				"command": "asciidoc.showSource",
+				"title": "%asciidoc.showSource.title%",
+				"category": "AsciiDoc",
+				"icon": {
+					"light": "./media/ViewSource.svg",
+					"dark": "./media/ViewSource_inverse.svg"
+				}
+			},
+			{
+				"command": "asciidoc.showPreviewSecuritySelector",
+				"title": "%asciidoc.showPreviewSecuritySelector.title%",
+				"category": "AsciiDoc"
+			},
+			{
+				"command": "asciidoc.preview.refresh",
+				"title": "%asciidoc.preview.refresh.title%",
+				"category": "AsciiDoc"
+			},
+			{
+				"command": "asciidoc.preview.toggleLock",
+				"title": "%asciidoc.preview.toggleLock.title%",
+				"category": "AsciiDoc"
+			},
+			{
+				"command": "asciidoc.saveHTML",
+				"title": "%asciidoc.saveHTML.title%",
+				"category": "AsciiDoc",
+				"icon": {
+					"light": "./media/SaveHTML.svg",
+					"dark": "./media/SaveHTML_inverse.svg"
+				}
+			},
+			{
+				"command": "asciidoc.saveDocbook",
+				"title": "%asciidoc.saveDocbook.title%",
+				"category": "AsciiDoc",
+				"icon": {
+					"light": "./media/SaveDocbook.svg",
+					"dark": "./media/SaveDocbook_inverse.svg"
+				}
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"command": "asciidoc.showPreviewToSide",
+					"when": "editorLangId == asciidoc",
+					"alt": "asciidoc.showPreview",
+					"group": "navigation"
+				},
+				{
+					"command": "asciidoc.showSource",
+					"when": "asciidocPreviewFocus",
+					"group": "navigation"
+				},
+				{
+					"command": "asciidoc.preview.refresh",
+					"when": "asciidocPreviewFocus",
+					"group": "1_asciidoc"
+				},
+				{
+					"command": "asciidoc.preview.toggleLock",
+					"when": "asciidocPreviewFocus",
+					"group": "1_asciidoc"
+				},
+				{
+					"command": "asciidoc.showPreviewSecuritySelector",
+					"when": "asciidocPreviewFocus",
+					"group": "1_asciidoc"
+				}
+			],
+			"explorer/context": [
+				{
+					"command": "asciidoc.showPreview",
+					"when": "resourceLangId == asciidoc",
+					"group": "navigation"
+				}
+			],
+			"editor/title/context": [
+				{
+					"command": "asciidoc.showPreview",
+					"when": "resourceLangId == asciidoc",
+					"group": "navigation"
+				}
+			],
+			"commandPalette": [
+				{
+					"command": "asciidoc.exportAsPDF",
+					"when": "editorLangId == asciidoc && !isWeb"
+				},
+				{
+					"command": "asciidoc.pasteImage",
+					"when": "editorLangId == asciidoc && !isWeb"
+				},
+				{
+					"command": "asciidoc.saveHTML",
+					"when": "editorLangId == asciidoc && !isWeb"
+				},
+				{
+					"command": "asciidoc.saveDocbook",
+					"when": "editorLangId == asciidoc && !isWeb"
+				},
+				{
+					"command": "asciidoc.showPreview",
+					"when": "editorLangId == asciidoc",
+					"group": "navigation"
+				},
+				{
+					"command": "asciidoc.showPreviewToSide",
+					"when": "editorLangId == asciidoc",
+					"group": "navigation"
+				},
+				{
+					"command": "asciidoc.showLockedPreviewToSide",
+					"when": "editorLangId == asciidoc",
+					"group": "navigation"
+				},
+				{
+					"command": "asciidoc.showSource",
+					"when": "asciidocPreviewFocus",
+					"group": "navigation"
+				},
+				{
+					"command": "asciidoc.showPreviewSecuritySelector",
+					"when": "editorLangId == asciidoc || asciidocPreviewFocus"
+				},
+				{
+					"command": "asciidoc.preview.toggleLock",
+					"when": "asciidocPreviewFocus"
+				}
+			]
+		},
+		"keybindings": [
+			{
+				"command": "asciidoc.showPreview",
+				"key": "shift+ctrl+v",
+				"mac": "shift+cmd+v",
+				"when": "editorLangId == asciidoc"
+			},
+			{
+				"command": "asciidoc.showPreviewToSide",
+				"key": "ctrl+k v",
+				"mac": "cmd+k v",
+				"when": "editorLangId == asciidoc"
+			},
+			{
+				"command": "asciidoc.pasteImage",
+				"key": "ctrl+alt+v",
+				"mac": "cmd+alt+v",
+				"when": "editorLangId == asciidoc"
+			},
+			{
+				"command": "asciidoc.saveHTML",
+				"key": "ctrl+alt+s",
+				"mac": "cmd+alt+s",
+				"when": "editorLangId == asciidoc"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "asciidoc",
+			"order": 21,
+			"properties": {
+				"asciidoc.asciidoctor_command": {
+					"type": "string",
+					"default": "asciidoctor",
+					"description": "%asciidoc.asciidoctor_command.desc%"
+				},
+				"asciidoc.asciidoctorpdf_command": {
+					"type": "string",
+					"default": "asciidoctor-pdf",
+					"description": "%asciidoc.asciidoctorpdf_command.desc%"
+				},
+				"asciidoc.previewFrontMatter": {
+					"type": "string",
+					"enum": [
+						"hide",
+						"show"
+					],
+					"default": "hide",
+					"description": "%asciidoc.previewFrontMatter.desc%",
+					"scope": "resource"
+				},
+				"asciidoc.preview.style": {
+					"type": "string",
+					"default": "",
+					"description": "%asciidoc.preview.style.desc%",
+					"scope": "resource"
+				},
+				"asciidoc.preview.attributes": {
+					"type": "object",
+					"default": {},
+					"description": "%asciidoc.preview.attributes.desc%",
+					"scope": "resource"
+				},
+				"asciidoc.preview.breaks": {
+					"type": "boolean",
+					"default": false,
+					"description": "%asciidoc.preview.breaks.desc%",
+					"scope": "resource"
+				},
+				"asciidoc.preview.linkify": {
+					"type": "boolean",
+					"default": true,
+					"description": "%asciidoc.preview.linkify.desc%",
+					"scope": "resource"
+				},
+				"asciidoc.preview.fontFamily": {
+					"type": "string",
+					"default": "-apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif",
+					"description": "%asciidoc.preview.fontFamily.desc%",
+					"scope": "resource"
+				},
+				"asciidoc.preview.fontSize": {
+					"type": "number",
+					"default": 14,
+					"description": "%asciidoc.preview.fontSize.desc%",
+					"scope": "resource"
+				},
+				"asciidoc.preview.lineHeight": {
+					"type": "number",
+					"default": 1.6,
+					"description": "%asciidoc.preview.lineHeight.desc%",
+					"scope": "resource"
+				},
+				"asciidoc.preview.useEditorStyle": {
+					"type": "boolean",
+					"default": true,
+					"description": "%asciidoc.preview.useEditorStyle.desc%"
+				},
+				"asciidoc.preview.refreshInterval": {
+					"type": "number",
+					"default": 2000,
+					"description": "%asciidoc.preview.refreshInterval.desc%",
+					"scope": "resource"
+				},
+				"asciidoc.preview.scrollPreviewWithEditor": {
+					"type": "boolean",
+					"default": true,
+					"description": "%asciidoc.preview.scrollPreviewWithEditor.desc%",
+					"scope": "resource"
+				},
+				"asciidoc.preview.scrollPreviewWithEditorSelection": {
+					"type": "boolean",
+					"default": true,
+					"description": "%asciidoc.preview.scrollPreviewWithEditorSelection.desc%",
+					"deprecationMessage": "%asciidoc.preview.scrollPreviewWithEditorSelection.deprecationMessage%"
+				},
+				"asciidoc.preview.markEditorSelection": {
+					"type": "boolean",
+					"default": true,
+					"description": "%asciidoc.preview.markEditorSelection.desc%",
+					"scope": "resource"
+				},
+				"asciidoc.preview.scrollEditorWithPreview": {
+					"type": "boolean",
+					"default": true,
+					"description": "%asciidoc.preview.scrollEditorWithPreview.desc%",
+					"scope": "resource"
+				},
+				"asciidoc.preview.doubleClickToSwitchToEditor": {
+					"type": "boolean",
+					"default": true,
+					"description": "%asciidoc.preview.doubleClickToSwitchToEditor.desc%",
+					"scope": "resource"
+				},
+				"asciidoc.preview.openAsciiDocLinks": {
+					"type": "string",
+					"default": "inPreview",
+					"description": "%asciidoc.preview.openAsciiDocLinks.desc%",
+					"scope": "resource",
+					"enum": [
+						"inPreview",
+						"inEditor"
+					],
+					"enumDescriptions": [
+						"%asciidoc.preview.openAsciiDocLinks.inPreview%",
+						"%asciidoc.preview.openAsciiDocLinks.inEditor%"
+					]
+				},
+				"asciidoc.trace": {
+					"type": "string",
+					"enum": [
+						"off",
+						"verbose"
+					],
+					"default": "off",
+					"description": "%asciidoc.trace.desc%",
+					"scope": "window"
+				},
+				"asciidoc.use_asciidoctor_js": {
+					"type": "boolean",
+					"default": true,
+					"description": "%asciidoc.use_asciidoctor_js.desc%"
+				},
+				"asciidoc.use_asciidoctorpdf": {
+					"type": "boolean",
+					"default": false,
+					"description": "%asciidoc.use_asciidoctorpdf.desc%"
+				},
+				"asciidoc.use_kroki": {
+					"type": "boolean",
+					"default": false,
+					"description": "%asciidoc.use_kroki.desc%"
+				},
+				"asciidoc.wkhtmltopdf_path": {
+					"type": "string",
+					"default": "",
+					"description": "%asciidoc.wkhtmltopdf_path.desc%",
+					"scope": "resource"
+				},
+				"asciidoc.forceUnixStyleSeparator": {
+					"type": "boolean",
+					"default": true,
+					"description": "%asciidoc.forceUnixStyleSeparator.desc%"
+				},
+				"asciidoc.saveDocbook.docbookVersion": {
+					"type": "string",
+					"default": "docbook5",
+					"description": "%asciidoc.saveDocbook.docbookVersion.desc%",
+					"enum": [
+						"docbook5",
+						"docbook45"
+					],
+					"enumDescriptions": [
+						"%asciidoc.saveDocbook.docbookVersion.docbook5%",
+						"%asciidoc.saveDocbook.docbookVersion.docbook45%"
+					]
+				},
+				"asciidoc.enableErrorDiagnostics": {
+					"type": "boolean",
+					"default": true,
+					"description": "%asciidoc.enableErrorDiagnostics.desc%"
+				},
+				"asciidoc.useWorkspaceRoot": {
+					"type": "boolean",
+					"default": false,
+					"description": "%asciidoc.useWorkspaceRoot.desc%"
+				}
+			}
+		},
+		"configurationDefaults": {
+			"[asciidoc]": {
+				"editor.wordWrap": "on",
+				"editor.quickSuggestions": false
+			}
+		},
+		"snippets": [
+			{
+				"language": "asciidoc",
+				"path": "./snippets/snippets.json"
+			}
+		]
+	},
+	"scripts": {
+		"copy-assets": "cp node_modules/@highlightjs/cdn-assets/highlight.min.js media/highlightjs && cp -r node_modules/@highlightjs/cdn-assets/languages media/highlightjs && cp -r node_modules/@highlightjs/cdn-assets/styles media/highlightjs",
+		"dev": "npm run build",
+		"build": "npm run copy-assets && npm run build-ext && npm run build-preview",
+		"build-web": "webpack --config extension-browser.webpack.config --mode none",
+		"build-preview": "webpack --config extension-preview.webpack.config --mode production",
+		"build-ext": "tsc -p ./",
+		"package": "npm run build && npm run build-web && vsce package",
+		"deploy": "vsce publish -p",
+		"lint": "eslint 'src/**/*.ts' 'preview-src/**/*.ts' --format unix",
+		"lint:fix": "npm run lint -- --fix",
+		"pretest": "npm run build",
+		"test": "node ./dist/src/test/runTest.js"
+	},
+	"devDependencies": {
+		"@highlightjs/cdn-assets": "~11.4",
+		"@types/lodash.throttle": "~4.1",
+		"@types/mocha": "~9.1",
+		"@types/node": "~12.20",
+		"@types/vscode": "~1.64",
+		"@typescript-eslint/eslint-plugin": "5.11.0",
+		"@typescript-eslint/parser": "5.11.0",
+		"copy-webpack-plugin": "10.2.4",
+		"eslint": "8.8.0",
+		"eslint-config-standard": "16.0.3",
+		"eslint-plugin-import": "2.25.4",
+		"eslint-plugin-node": "11.1.0",
+		"eslint-plugin-promise": "6.0.0",
+		"lodash.throttle": "4.1.1",
+		"mocha": "9.2.0",
+		"mocha-junit-reporter": "2.0.2",
+		"mocha-multi-reporters": "1.5.1",
+		"path-browserify": "1.0.1",
+		"ts-loader": "9.2.6",
+		"typescript": "4.5.5",
+		"vsce": "2.6.7",
+		"vscode-test": "1.6.1",
+		"webpack": "5.68.0",
+		"webpack-cli": "4.9.2"
+	},
+	"dependencies": {
+		"@asciidoctor/core": "2.2.6",
+		"@asciidoctor/docbook-converter": "2.0.0",
+		"@orcid/bibtex-parse-js": "0.0.25",
+		"asciidoctor-kroki": "0.15.4",
+		"file-url": "4.0.0",
+		"follow-redirects": "1.14.8",
+		"https-proxy-agent": "5.0.0",
+		"uuid": "8.3.2",
+		"vscode-nls": "5.0.0"
+	},
+	"__metadata": {
+		"id": "c1309cc2-f420-46a3-b2be-ca04f4d9e51b",
+		"publisherId": "b139f5ca-8a7c-4029-b14a-59f66583c82c",
+		"publisherDisplayName": "asciidoctor",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1671787763495,
+		"preRelease": false
+	}
+}

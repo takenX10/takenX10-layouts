@@ -1,0 +1,157 @@
+{
+	"name": "cmake-language-support-vscode",
+	"displayName": "CMake Language Support",
+	"description": "CMake language support for VS Code.",
+	"version": "0.0.9",
+	"author": "José Torres",
+	"publisher": "josetr",
+	"categories": [
+		"Programming Languages"
+	],
+	"preview": true,
+	"keywords": [
+		"cmake"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/josetr/cmake-language-support"
+	},
+	"engines": {
+		"vscode": "^1.54.0"
+	},
+	"activationEvents": [
+		"onLanguage:cmake",
+		"workspaceContains:CMakeLists.txt"
+	],
+	"icon": "icon.png",
+	"main": "./dist/extension.js",
+	"contributes": {
+		"languages": [
+			{
+				"id": "cmake",
+				"aliases": [
+					"CMake",
+					"cmake"
+				],
+				"extensions": [
+					".cmake"
+				],
+				"filenames": [
+					"CMakeLists.txt"
+				],
+				"configuration": "./language-configuration.json"
+			},
+			{
+				"id": "cmake-cache",
+				"filenames": [
+					"CMakeCache.txt"
+				],
+				"aliases": [
+					"CMakeCache"
+				]
+			},
+			{
+				"id": "cmake-documentation",
+				"aliases": [
+					"CMakeDocumentation"
+				]
+			}
+		],
+		"grammars": [
+			{
+				"language": "cmake",
+				"scopeName": "source.cmake",
+				"path": "./syntaxes/CMake.tmLanguage.json"
+			},
+			{
+				"language": "cmake-cache",
+				"scopeName": "source.cmakecache",
+				"path": "./syntaxes/CMakeCache.tmLanguage.json"
+			},
+			{
+				"language": "cmake-documentation",
+				"scopeName": "source.cmakedocumentation",
+				"path": "./syntaxes/CMakeDocumentation.tmLanguage.json"
+			}
+		],
+		"configuration": {
+			"title": "CMake Language Support",
+			"properties": {
+				"cmake.languageSupport.enableFileAPI": {
+					"type": "boolean",
+					"default": false,
+					"description": "Enables experimental use of cmake-file-api in order to provide more accurate results."
+				},
+				"cmake.languageSupport.dotnetPath": {
+					"type": "string",
+					"default": "",
+					"description": "A path to a .NET 6 Runtime executable."
+				},
+				"cmake.format.spaceAfterCommandName": {
+					"type": "boolean",
+					"default": false,
+					"description": "Adds a space after a command name."
+				},
+				"cmake.format.spaceInParentheses": {
+					"type": "boolean",
+					"default": false,
+					"description": "Adds spaces between parentheses."
+				},
+				"cmake.format.allowOptionalArgumentIndentation": {
+					"type": "boolean",
+					"default": false,
+					"description": "Allow one extra manually added indentation before an argument."
+				}
+			}
+		},
+		"configurationDefaults": {
+			"[cmake]": {
+				"editor.quickSuggestions": {
+					"strings": true
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run package",
+		"watch": "webpack --watch",
+		"compile": "webpack",
+		"compile-tests": "tsc -p test",
+		"watch-tests": "tsc -p test -w",
+		"package": "webpack --mode production --devtool hidden-source-map",
+		"lint": "eslint ./src --ext .ts",
+		"test": "powershell ./test.ps1"
+	},
+	"dependencies": {
+		"ts-loader": "^9.2.6",
+		"ts-node": "^10.4.0",
+		"vscode-languageclient": "^8.0.0-next.2"
+	},
+	"devDependencies": {
+		"@types/mocha": "^8.2.2",
+		"@types/vscode": "^1.54.0",
+		"@typescript-eslint/eslint-plugin": "^4.23.0",
+		"@typescript-eslint/parser": "^4.23.0",
+		"@vscode/test-electron": "^1.6.1",
+		"copy-webpack-plugin": "^9.0.1",
+		"eslint": "^7.26.0",
+		"mocha": "^8.4.0",
+		"mocha-loader": "^5.1.5",
+		"webpack": "^5.52.1",
+		"webpack-cli": "^4.8.0"
+	},
+	"extensionDependencies": [
+		"ms-dotnettools.vscode-dotnet-runtime"
+	],
+	"__metadata": {
+		"id": "dce141da-393b-4514-9f89-18dc85ccc626",
+		"publisherId": "b8ad060f-6f52-4ecc-b556-eed7898c645d",
+		"publisherDisplayName": "Jose Torres",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"updated": true,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1672826965775,
+		"preRelease": false
+	}
+}

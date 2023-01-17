@@ -1,0 +1,76 @@
+{
+  "fileTypes": [ "CMakeCache.txt" ],
+  "name": "CMake",
+  "scopeName": "source.cmakecache",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#entry" }
+  ],
+  "repository": {
+    "entry": {
+      "begin": "^(?:(\"[^\"]*\"?)|([^=:]+))(.*)",
+      "end": "$",
+      "beginCaptures": {
+        "1": {
+          "name": "string.cmakecache"
+        },
+        "2": {
+          "name": "variable.other.cmakecache",
+          "patterns": [
+            { "include": "#modifier" }
+          ]
+        },
+        "3": {
+          "patterns": [
+            {
+              "begin": ":([^=]*)",
+              "end": "$",
+              "beginCaptures": {
+                "1": {
+                  "patterns": [
+                    { "include": "#type" },
+                    { "match": ".+" }
+                  ]
+                }
+              },
+              "patterns": [
+                {
+                  "match": "=(.*)",
+                  "captures": {
+                    "1": {
+                      "patterns": [
+                        { "include": "#number" },
+                        { "include": "#boolean" },
+                        { "name": "string.cmakecache", "match": ".+" }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "comment": {
+      "name": "comment.cmakecache",
+      "match": "(#|//)(.*)$"
+    },
+    "modifier": {
+      "name": "keyword.modifier.cmakecache",
+      "match": "\\bADVANCED|STRINGS$"
+    },
+    "type": {
+      "name": "keyword.type.cmakecache",
+      "match": "\\b(BOOL|STRING|FILEPATH|PATH|STATIC|INTERNAL)$"
+    },
+    "number": {
+      "name": "constant.numeric.cmakecache",
+      "match": "\\b[\\d.]+$"
+    },
+    "boolean": {
+      "name": "constant.language.boolean.cmakecache",
+      "match": "(?i:TRUE|FALSE|ON|OFF|YES|NO|Y|N)\\b"
+    }
+  }
+}

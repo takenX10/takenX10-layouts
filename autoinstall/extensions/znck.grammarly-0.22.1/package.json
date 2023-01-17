@@ -1,0 +1,466 @@
+{
+	"private": true,
+	"name": "grammarly",
+	"publisher": "znck",
+	"displayName": "Grammarly",
+	"description": "A grammar checking for Visual Studio Code using Grammarly.",
+	"version": "0.22.1",
+	"icon": "assets/logo.png",
+	"preview": true,
+	"engines": {
+		"vscode": "^1.63.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/znck/grammarly",
+		"directory": "extension"
+	},
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		"Grammarly",
+		"grammar",
+		"spellcheck",
+		"writing assistant",
+		"writing"
+	],
+	"activationEvents": [
+		"onCommand:grammarly.check",
+		"onCommand:grammarly.login",
+		"onCommand:grammarly.logout",
+		"onLanguage:plaintext",
+		"onLanguage:markdown",
+		"onLanguage:html"
+	],
+	"contributes": {
+		"configuration": {
+			"title": "Grammarly",
+			"properties": {
+				"grammarly.patterns": {
+					"type": "array",
+					"description": "A glob pattern, like `*.{md,txt}` for file scheme.",
+					"items": {
+						"type": "string"
+					},
+					"default": [
+						"**/readme.md",
+						"**/README.md",
+						"**/*.txt"
+					],
+					"required": true,
+					"scope": "window",
+					"order": 0,
+					"markdownDeprecationMessage": "Use [Files: Include](#grammarly.files.include#)"
+				},
+				"grammarly.files.include": {
+					"type": "array",
+					"markdownDescription": "Configure [glob patterns](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options) for including files and folders.",
+					"items": {
+						"type": "string"
+					},
+					"default": [
+						"**/readme.md",
+						"**/README.md",
+						"**/*.txt"
+					],
+					"required": true,
+					"scope": "window",
+					"order": 1
+				},
+				"grammarly.files.exclude": {
+					"type": "array",
+					"markdownDescription": "Configure [glob patterns](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options) for excluding files and folders.",
+					"items": {
+						"type": "string"
+					},
+					"default": [],
+					"required": true,
+					"scope": "window",
+					"order": 2
+				},
+				"grammarly.selectors": {
+					"type": "array",
+					"description": "Filter documents to be checked with Grammarly.",
+					"items": {
+						"type": "object",
+						"properties": {
+							"scheme": {
+								"type": "string",
+								"description": "A Uri scheme, like `file` or `untitled`."
+							},
+							"language": {
+								"type": "string",
+								"description": "A language id, like `typescript`."
+							},
+							"pattern": {
+								"type": "string",
+								"description": "A glob pattern, like `*.{md,txt}`."
+							}
+						}
+					},
+					"default": [],
+					"required": true,
+					"scope": "window",
+					"order": 99
+				},
+				"grammarly.startTextCheckInPausedState": {
+					"type": "boolean",
+					"description": "Start text checking session in paused state",
+					"default": false
+				},
+				"grammarly.config.documentDialect": {
+					"markdownDescription": "Specific variety of English being written. See [this article](https://support.grammarly.com/hc/en-us/articles/115000089992-Select-between-British-English-American-English-Canadian-English-and-Australian-English) for differences.",
+					"enum": [
+						"american",
+						"australian",
+						"british",
+						"canadian",
+						"auto-text"
+					],
+					"enumDescriptions": [
+						"",
+						"",
+						"",
+						"",
+						"An appropriate value based on the text."
+					],
+					"default": "auto-text",
+					"scope": "language-overridable"
+				},
+				"grammarly.config.documentDomain": {
+					"markdownDescription": "The style or type of writing to be checked. See [What is domain/document type](https://support.grammarly.com/hc/en-us/articles/115000091472-What-is-domain-document-type-)?",
+					"enum": [
+						"academic",
+						"business",
+						"general",
+						"mail",
+						"casual",
+						"creative"
+					],
+					"enumDescriptions": [
+						"Academic is the strictest style of writing. On top of catching grammar and punctuation issues, Grammarly will make suggestions around passive voice, contractions, and informal pronouns (I, you), and will point out unclear antecedents (e.g., sentences starting with “This is…”).",
+						"The business style setting checks the text against formal writing criteria. However, unlike the Academic domain, it allows the use of some informal expressions, informal pronouns, and unclear antecedents.",
+						"This is the default style and uses a medium level of strictness.",
+						"The email genre is similar to the General domain and helps ensure that your email communication is engaging. In addition to catching grammar, spelling, and punctuation mistakes, Grammarly also points out the use of overly direct language that may sound harsh to a reader.",
+						"Casual is designed for informal types of writing and ignores most style issues. It does not flag contractions, passive voice, informal pronouns, who-versus-whom usage, split infinitives, or run-on sentences. This style is suitable for personal communication.",
+						"This is the most permissive style. It catches grammar, punctuation, and spelling mistakes but allows some leeway for those who want to intentionally bend grammar rules to achieve certain effects. Creative doesn’t flag sentence fragments (missing subjects or verbs), wordy sentences, colloquialisms, informal pronouns, passive voice, incomplete comparisons, or run-on sentences."
+					],
+					"default": "general",
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.ConjunctionAtStartOfSentence": {
+					"description": "Flags use of conjunctions such as 'but' and 'and' at the beginning of sentences.",
+					"type": "boolean",
+					"default": false,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.Fluency": {
+					"description": "Suggests ways to sound more natural and fluent.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.InformalPronounsAcademic": {
+					"description": "Flags use of personal pronouns such as 'I' and 'you' in academic writing.",
+					"type": "boolean",
+					"default": false,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.MissingSpaces": {
+					"description": "Suggests adding missing spacing after a numeral when writing times.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.NounStrings": {
+					"description": "Flags a series of nouns that modify a final noun.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.NumbersBeginningSentences": {
+					"description": "Suggests spelling out numbers at the beginning of sentences.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.NumbersZeroThroughTen": {
+					"description": "Suggests spelling out numbers zero through ten.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.OxfordComma": {
+					"description": "Suggests adding the Oxford comma after the second-to-last item in a list of things.",
+					"type": "boolean",
+					"default": false,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.PassiveVoice": {
+					"description": "Flags use of passive voice.",
+					"type": "boolean",
+					"default": false,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.PersonFirstLanguage": {
+					"description": "Suggests using person-first language to refer respectfully to an individual with a disability.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.PossiblyBiasedLanguageAgeRelated": {
+					"description": "Suggests alternatives to potentially biased language related to older adults.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.PossiblyBiasedLanguageDisabilityRelated": {
+					"description": "Suggests alternatives to potentially ableist language.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.PossiblyBiasedLanguageFamilyRelated": {
+					"description": "Suggests alternatives to potentially biased language related to parenting and family systems.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.PossiblyBiasedLanguageGenderRelated": {
+					"description": "Suggests alternatives to potentially gender-biased and non-inclusive phrasing.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.PossiblyBiasedLanguageHumanRights": {
+					"description": "Suggests alternatives to language related to human slavery.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.PossiblyBiasedLanguageHumanRightsRelated": {
+					"description": "Suggests alternatives to terms with origins in the institution of slavery.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.PossiblyBiasedLanguageLgbtqiaRelated": {
+					"description": "Flags LGBTQIA+-related terms that may be seen as biased, outdated, or disrespectful in some contexts.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.PossiblyBiasedLanguageRaceEthnicityRelated": {
+					"description": "Suggests alternatives to potentially biased language related to race and ethnicity.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.PossiblyPoliticallyIncorrectLanguage": {
+					"description": "Suggests alternatives to language that may be considered politically incorrect.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.PrepositionAtTheEndOfSentence": {
+					"description": "Flags use of prepositions such as 'with' and 'in' at the end of sentences.",
+					"type": "boolean",
+					"default": false,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.PunctuationWithQuotation": {
+					"description": "Suggests placing punctuation before closing quotation marks.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.ReadabilityFillerwords": {
+					"description": "Flags long, complicated sentences that could potentially confuse your reader.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.ReadabilityTransforms": {
+					"description": "Suggests splitting long, complicated sentences that could potentially confuse your reader.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.SentenceVariety": {
+					"description": "Flags series of sentences that follow the same pattern.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.SpacesSurroundingSlash": {
+					"description": "Suggests removing extra spaces surrounding a slash.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.SplitInfinitive": {
+					"description": "Suggests rewriting split infinitives so that an adverb doesn't come between 'to' and the verb.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.StylisticFragments": {
+					"description": "Suggests completing all incomplete sentences, including stylistic sentence fragments that may be intentional.",
+					"type": "boolean",
+					"default": false,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.UnnecessaryEllipses": {
+					"description": "Flags unnecessary use of ellipses (...).",
+					"type": "boolean",
+					"default": false,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.Variety": {
+					"description": "Suggests alternatives to words that occur frequently in the same paragraph.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				},
+				"grammarly.config.suggestions.Vocabulary": {
+					"description": "Suggests alternatives to bland and overused words such as 'good' and 'nice'.",
+					"type": "boolean",
+					"default": true,
+					"scope": "language-overridable"
+				}
+			}
+		},
+		"commands": [
+			{
+				"title": "Check text",
+				"category": "Grammarly",
+				"command": "grammarly.check",
+				"icon": "$(pass-filled)",
+				"enablement": "!grammarly.isActive"
+			},
+			{
+				"title": "Login / Connect your account",
+				"category": "Grammarly",
+				"command": "grammarly.login",
+				"icon": "$(log-in)",
+				"enablement": "!grammarly.isRunning || !grammarly.isUserAccountConnected"
+			},
+			{
+				"title": "Log out",
+				"category": "Grammarly",
+				"command": "grammarly.logout",
+				"icon": "$(log-out)",
+				"enablement": "grammarly.isUserAccountConnected"
+			},
+			{
+				"title": "Restart language server",
+				"category": "Grammarly",
+				"command": "grammarly.restartServer",
+				"icon": "$(debug-restart)"
+			},
+			{
+				"title": "Pause text check",
+				"category": "Grammarly",
+				"command": "grammarly.pauseCheck",
+				"icon": "$(debug-pause)",
+				"enablement": "grammarly.isActive && !grammarly.isPaused"
+			},
+			{
+				"title": "Resume text check",
+				"category": "Grammarly",
+				"command": "grammarly.resumeCheck",
+				"icon": "$(debug-start)",
+				"enablement": "grammarly.isActive && grammarly.isPaused"
+			}
+		]
+	},
+	"license": "MIT",
+	"main": "./dist/extension/index.node.js",
+	"browser": "./dist/extension/index.browser.js",
+	"buildConfig": {
+		"external": [
+			"vscode"
+		],
+		"useMain": false,
+		"sources": {
+			"src/index.ts": [
+				{
+					"format": "esm",
+					"file": "dist/extension/index.mjs"
+				},
+				{
+					"format": "cjs",
+					"file": "dist/extension/index.node.js",
+					"bundle": {
+						"platform": "node",
+						"external": [
+							"vscode"
+						]
+					}
+				}
+			],
+			"src/server.ts": [
+				{
+					"format": "esm",
+					"file": "dist/server/index.mjs"
+				},
+				{
+					"format": "cjs",
+					"file": "dist/server/index.node.js",
+					"bundle": {
+						"platform": "node",
+						"conditions": [
+							"node",
+							"import"
+						],
+						"external": [
+							"buffer",
+							"bufferutil",
+							"encoding",
+							"node:buffer",
+							"node:crypto",
+							"node:events",
+							"node:fs",
+							"node:http",
+							"node:https",
+							"node:net",
+							"node:os",
+							"node:path",
+							"node:perf_hooks",
+							"node:process",
+							"node:stream",
+							"node:stream/web",
+							"node:tls",
+							"node:url",
+							"node:util",
+							"node:vm",
+							"node:zlib",
+							"worker_threads",
+							"utf-8-validate"
+						]
+					}
+				}
+			]
+		}
+	},
+	"files": [
+		"./dist",
+		"./assets"
+	],
+	"scripts": {
+		"build": "node ../scripts/build-extension.mjs",
+		"release": "node ../scripts/publish-extension.mjs"
+	},
+	"__metadata": {
+		"id": "f2c8b652-2886-45ef-8bc0-c8d1ee8a0e9f",
+		"publisherId": "ae59adf5-29af-42f4-9e2f-a3ab76a1dabb",
+		"publisherDisplayName": "Rahul Kadyan",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1667585658310,
+		"preRelease": false
+	}
+}

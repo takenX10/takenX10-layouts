@@ -1,0 +1,75 @@
+{
+	"name": "web-accessibility",
+	"displayName": "Web Accessibility",
+	"description": "Audit Web Accessibility issues in Visual Studio Code",
+	"version": "0.2.83",
+	"publisher": "MaxvanderSchee",
+	"license": "MIT",
+	"repository": "https://github.com/mvdschee/web-accessibility",
+	"icon": "a11y-icon.png",
+	"engines": {
+		"vscode": "^1.25.0"
+	},
+	"categories": [
+		"Linters"
+	],
+	"keywords": [
+		"web accessibility",
+		"a11y",
+		"wai-aria",
+		"wai",
+		"accessibility",
+		"audit"
+	],
+	"activationEvents": [
+		"onLanguage:html",
+		"onLanguage:javascriptreact",
+		"onLanguage:vue-html",
+		"onLanguage:vue",
+		"onLanguage:handlebars"
+	],
+	"main": "./client/out/extension",
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Web Accessibility",
+			"properties": {
+				"webAccessibility.maxNumberOfProblems": {
+					"scope": "resource",
+					"type": "number",
+					"default": 100,
+					"description": "Controls the maximum number of problems produced by the server."
+				},
+				"webAccessibility.semanticExclude": {
+					"scope": "resource",
+					"type": "boolean",
+					"default": true,
+					"description": "Controls if non-semantic HTML is going to produce problems by the server."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "cd client && npm run update-vscode && cd .. && npm run compile",
+		"compile": "tsc -b",
+		"watch": "tsc -b -w",
+		"postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
+		"test": "sh ./scripts/e2e.sh"
+	},
+	"devDependencies": {
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^8.10.64",
+		"tslint": "^5.20.1",
+		"typescript": "^3.9.7"
+	},
+	"__metadata": {
+		"id": "bba5240f-53e5-45b1-89e2-c5b05a897044",
+		"publisherId": "4778fb34-5d97-4a91-b1dc-8eb59768b533",
+		"publisherDisplayName": "Max van der Schee",
+		"targetPlatform": "undefined",
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"preRelease": false,
+		"installedTimestamp": 1650743988829
+	}
+}
