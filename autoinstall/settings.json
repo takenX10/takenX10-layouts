@@ -1,0 +1,57 @@
+{
+    "security.workspace.trust.untrustedFiles": "open",
+    "explorer.confirmDelete": false,
+    "files.autoSave": "afterDelay",
+    "explorer.confirmDragAndDrop": false,
+    "search.useGlobalIgnoreFiles": true,
+    "search.useIgnoreFiles": true,
+    "diffEditor.wordWrap": "on",
+    "editor.wordWrap": "on",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "git.autofetch": true,
+    "cmake.configureOnOpen": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "terminal.explorerKind": "external",
+    "workbench.colorTheme": "Chalk",
+    "editor.renderWhitespace": "all",
+    "window.menuBarVisibility": "toggle",
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "emmet.preferences": {
+    
+    },
+    "git.confirmSync": false,
+    "liveServer.settings.CustomBrowser": "firefox",
+    "gitlens.hovers.currentLine.over": "line",
+    "liveServer.settings.donotVerifyTags": true,
+    "editor.bracketPairColorization.enabled": true,
+    "htmltagwrap.tag": "div",
+    "files.associations": {
+        "*.html": "html"
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "workbench.tree.indent": 25,
+    "workbench.colorCustomizations": {
+        "tree.indentGuidesStroke": "#ff0000"
+    },
+    "material-icon-theme.languages.associations": {
+    
+    },
+    "[html]": {
+        "editor.defaultFormatter": "mohd-akram.vscode-html-format"
+    },
+    "editor.minimap.enabled": false,
+    "workbench.activityBar.visible": false,
+    "remote.SSH.remotePlatform": {
+        "10.98.41.50": "linux"
+    },
+    "window.zoomLevel": 1,
+}

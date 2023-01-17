@@ -1,0 +1,25 @@
+// Place your key bindings in this file to override the defaults
+[
+    { "key": "ctrl+n", "command": "explorer.newFile" },
+    { "key": "ctrl+u", "command": "", "when": "" },
+    { "key": "ctrl+m", "command": "workbench.action.openEditorAtIndex1" },
+    { "key": "ctrl+p", "command": "better-quick-open.quickopen" },
+    /*{
+        "key": "ctrl+e ctrl+u",
+        "command": "url-encode.encodeURL"
+    },
+    {
+        "key": "ctrl+d ctrl+u",
+        "command": "url-encode.decodeURL"
+    },
+    {
+        "key": "ctrl+e ctrl+b",
+        "command": "extension.base64Encode",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+d ctrl+b",
+        "command": "extension.base64Decode",
+        "when": "editorTextFocus"
+    }*/
+]
